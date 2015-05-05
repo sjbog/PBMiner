@@ -1,6 +1,6 @@
 
 <packages>
-    <package name="HybridMiner" version="6.4.100" os="all" desc="Hybrid Miner" org="University of Tartu" license="L-GPL" author="Bogdan S." auto="false" hasPlugins="true" logo="http://www.promtools.org/prom6/packages/prom_subtitle_hat_300.png">
+    <package name="PBMiner" version="6.4.100" os="all" desc="PB-Miner" org="University of Tartu" license="L-GPL" author="Bogdan S." auto="false" hasPlugins="true" logo="http://www.promtools.org/prom6/packages/prom_subtitle_hat_300.png">
         <dependency org="prom" name="Log" rev="latest" changing="true" transitive="true" />
         <dependency org="prom" name="InductiveMiner" rev="latest" changing="true" transitive="true" />
         <dependency org="prom" name="HeuristicsMiner" rev="latest" changing="true" transitive="true" />

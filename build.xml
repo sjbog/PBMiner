@@ -1,4 +1,4 @@
-<project name="HybridMiner" default="Compile Sources" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+<project name="PBMiner" default="Compile Sources" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
 		<!-- set global properties for this build -->
 		<property environment="env" />
 		<property name="src" location="src" />
@@ -8,7 +8,7 @@
 		<property name="dist" location="dist" />
 		<property name="release" location="latestrelease" />
 		<property name="version" value="${major_minor}.${env.BUILD_NUMBER}" />
-		<property name="project" value="HybridMiner" />
+		<property name="project" value="PBMiner" />
 
 		<!-- Set the os to win32, win64, lin32, lin64, mac, or all -->
 		<property name="os" value="all" />
@@ -17,7 +17,7 @@
 
 		<property name="author" value="Bogdan S." />
 		<property name="organization" value="University of Tartu" />
-		<property name="description" value="Hybrid Miner" />
+		<property name="description" value="PB-Miner" />
 		<property name="license" value="L-GPL" />
 		<property name="logo" value="http://www.promtools.org/prom6/packages/prom_subtitle_hat_300.png" />
 

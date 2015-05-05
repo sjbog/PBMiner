@@ -1,5 +1,5 @@
 <ivy-module version="2.0">
-    <info organisation="prom" module="HybridMiner" revision="latest"/>
+    <info organisation="prom" module="PBMiner" revision="latest"/>
     <dependencies>
         <dependency org="prom" name="Log" rev="latest" changing="true" transitive="true" />
         <dependency org="prom" name="InductiveMiner" rev="latest" changing="true" transitive="true" />
