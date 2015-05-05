@@ -29,7 +29,7 @@ public class LogProcessor {
 	public static XEventClassifier defaultXEventClassifier = new XEventAndClassifier( new XEventNameClassifier(), new XEventLifeTransClassifier() );
 
 	public XLog log;
-	public String SubprocessNamePrefix = "Block", DeclarativeSubprocessNamePrefix = "Declarative_" ;
+	public String SubprocessNamePrefix = "Branch", DeclarativeSubprocessNamePrefix = "Declarative_" ;
 	public static String DeclarativePseudoEvent = "__declarative_pseudo_event__";
 	public static int DeclarativeBranchesThreshold = 3;
 
