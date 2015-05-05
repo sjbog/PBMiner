@@ -137,7 +137,7 @@ public class Main {
 		return result.toArray();
 	}
 
-	@Plugin (name = "Mine BPMN with Hybrid Miner", returnLabels = { "Process Tree" }, returnTypes = { BPMNDiagram.class }, parameterLabels = { "Log" }, userAccessible = true)
+	@Plugin (name = "Mine BPMN with Hybrid Miner", returnLabels = { "BPMN model" }, returnTypes = { BPMNDiagram.class }, parameterLabels = { "Log" }, userAccessible = true)
 	@UITopiaVariant (affiliation = "University of Tartu", author = "Bogdan S", email = "bogdan89@ut.ee")
 	@PluginVariant (variantLabel = "Mine a BPMN, dialog", requiredParameterLabels = { 0 })
 	public BPMNDiagram mineGuiBPMN(PluginContext context, XLog log) {
