@@ -1,8 +1,6 @@
 package org.processmining.plugins.PBMiner;
 
-import org.deckfour.xes.classification.XEventAndClassifier;
 import org.deckfour.xes.classification.XEventClassifier;
-import org.deckfour.xes.classification.XEventLifeTransClassifier;
 import org.deckfour.xes.classification.XEventNameClassifier;
 import org.deckfour.xes.model.XLog;
 import org.deckfour.xes.model.impl.XAttributeLiteralImpl;
@@ -26,12 +24,13 @@ public class LogProcessor {
 
 //	Inductive Miner - incompleteness
 	public MiningParameters inductiveMinerParams = new MiningParametersIMin( );
-	public static XEventClassifier defaultXEventClassifier = new XEventAndClassifier( new XEventNameClassifier(), new XEventLifeTransClassifier() );
+//	public static XEventClassifier defaultXEventClassifier = new XEventAndClassifier( new XEventNameClassifier(), new XEventLifeTransClassifier() );
+	public static XEventClassifier defaultXEventClassifier = new XEventNameClassifier();
 
 	public XLog log;
 	public String SubprocessNamePrefix = "Branch", DeclarativeSubprocessNamePrefix = "Declarative_" ;
 	public static String DeclarativePseudoEvent = "__declarative_pseudo_event__";
-	public static int DeclarativeBranchesThreshold = 3;
+	public static int DeclarativeBranchesThreshold = 6;
 
 	public Map< String, LogProcessor > childBlocks = new HashMap<>(  );
 
