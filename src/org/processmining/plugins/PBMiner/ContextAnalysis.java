@@ -1,9 +1,6 @@
 package org.processmining.plugins.PBMiner;
 
-import org.deckfour.xes.classification.XEventAndClassifier;
 import org.deckfour.xes.classification.XEventClassifier;
-import org.deckfour.xes.classification.XEventLifeTransClassifier;
-import org.deckfour.xes.classification.XEventNameClassifier;
 import org.deckfour.xes.info.XLogInfo;
 import org.deckfour.xes.info.impl.XLogInfoImpl;
 import org.deckfour.xes.model.XEvent;
@@ -23,15 +20,16 @@ public class ContextAnalysis {
 	public String traceStartPseudoEvent = "__start__";
 	public String traceEndPseudoEvent = "__end__";
 
-	public static XEventClassifier defaultXEventClassifier = new XEventAndClassifier( new XEventNameClassifier( ), new XEventLifeTransClassifier( ) );
-	public XEventClassifier xEventClassifier = defaultXEventClassifier;
+	public XEventClassifier xEventClassifier;
 
 	public ContextAnalysis( XLog xLog ) {
 		this.log = xLog;
+		this.xEventClassifier = LogProcessor.defaultXEventClassifier;
 		this.printStream = System.out;
 	}
 	public ContextAnalysis( XLog xLog, PrintStream ps ) {
 		this.log = xLog;
+		this.xEventClassifier = LogProcessor.defaultXEventClassifier;
 		if ( ps != null )
 			this.printStream = ps;
 	}

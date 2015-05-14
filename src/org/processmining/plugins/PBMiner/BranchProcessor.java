@@ -84,8 +84,10 @@ public class BranchProcessor {
 			for ( String event : branchStartEvents.get( i ) )
 				eventToBranch.put( event, new HashSet<>( Arrays.asList( i ) ) );
 
+		XLog blockLog = XLogReader.filterByEvents( this.log, FindBlockEvents( eventToBranch.keySet(), this.contextAnalysis.predecessors ) );
+
 //		Mark events with a single branch opened
-		for ( XTrace trace : log ) {
+		for ( XTrace trace : blockLog ) {
 			Set< Integer > openedBranches = new HashSet<>( );
 			String event;
 
@@ -168,6 +170,22 @@ public class BranchProcessor {
 			fringe.addAll( predecessorEvents );
 		}
 		processedEvents.retainAll( tailEvents );
+		return processedEvents;
+	}
+
+
+	public static Set< String > FindBlockEvents( Set< String > startEvents, Map< String, Set< String > > predecessors ) {
+		Set< String > processedEvents = new HashSet<>();
+		LinkedList< String > fringe = new LinkedList<>( startEvents );
+
+		while ( ! fringe.isEmpty( ) ) {
+			String event = fringe.pop( );
+			Set< String > predecessorEvents = predecessors.getOrDefault( event, new HashSet< String >( ) );
+
+			processedEvents.add( event );
+			predecessorEvents.removeAll( processedEvents );
+			fringe.addAll( predecessorEvents );
+		}
 		return processedEvents;
 	}
 }

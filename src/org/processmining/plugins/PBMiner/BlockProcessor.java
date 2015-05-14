@@ -40,15 +40,14 @@ public class BlockProcessor {
 	 * TODO: validate if "start events" block structure is the same as whole log's
 	 */
 	public List< Set< String >> FindParallelBranches( HashSet< String > processedEvents, HashSet< String > edgeEvents ) throws Exception {
-		XLog xLog = org.processmining.plugins.PBMiner.XLogReader.filterSkipEvents( this.log, processedEvents );
+		XLog xLog = XLogReader.filterSkipEvents( this.log, processedEvents );
 		Block treeRoot = this.MineProcessTreeRoot( xLog );
 		if ( treeRoot instanceof Block.Seq )
 			treeRoot = FindFirstBlock( treeRoot );
 
-		Block treeRootEdgeEvents = ( Block ) IMProcessTree.mineProcessTree(
-				org.processmining.plugins.PBMiner.XLogReader.filterByEvents( this.log, edgeEvents )
-				, this.inductiveMinerParams
-		).getRoot( );
+		Block treeRootEdgeEvents = this.MineProcessTreeRoot(
+				XLogReader.filterByEvents( this.log, edgeEvents )
+		);
 
 		printStream.println( "Edge tree:\t" + treeRootEdgeEvents.toString() );
 		printStream.println( "Whole tree:\t" + treeRoot.toString() );
@@ -57,7 +56,7 @@ public class BlockProcessor {
 		List< Set< String > > eventsList;
 
 		if ( treeRootEdgeEvents instanceof Block.And ) {
-			eventsList = new org.processmining.plugins.PBMiner.BranchProcessor( xLog, printStream ).ExtractParallelBranches( );
+			eventsList = new BranchProcessor( xLog, printStream ).ExtractParallelBranches( );
 			this.updateFringeEvents( processedEvents, edgeEvents, eventsList );
 		}
 		else {
@@ -70,7 +69,7 @@ public class BlockProcessor {
 
 	public boolean IsParallelGatewayPresent( HashSet< String > events ) {
 		for ( Node node : IMProcessTree.mineProcessTree(
-				org.processmining.plugins.PBMiner.XLogReader.filterByEvents( this.log, events )
+				XLogReader.filterByEvents( this.log, events )
 				, this.inductiveMinerParams
 		).getNodes( ) ) {
 			if ( node instanceof Block.And )
@@ -188,15 +187,15 @@ public class BlockProcessor {
 			if ( node instanceof Block.Seq ) {
 				eventsOfParallelBranches.addAll(
 						new ContextAnalysis(
-								org.processmining.plugins.PBMiner.XLogReader.filterByEvents( this.log, GetNodeTasks( node ) )
+								XLogReader.filterByEvents( this.log, GetNodeTasks( node ) )
 						).FindParallelBranches( )
 				);
 			}
 
 			else if ( node instanceof Block.And ) {
 				eventsOfParallelBranches.addAll(
-						new org.processmining.plugins.PBMiner.BranchProcessor(
-								org.processmining.plugins.PBMiner.XLogReader.filterByEvents( this.log, GetNodeTasks( node ) )
+						new BranchProcessor(
+								XLogReader.filterByEvents( this.log, GetNodeTasks( node ) )
 								, printStream
 						).ExtractParallelBranches()
 				);

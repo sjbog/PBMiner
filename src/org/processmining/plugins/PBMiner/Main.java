@@ -25,11 +25,10 @@ public class Main {
 
 		try {
 			if ( args.length == 0 )
-				log = org.processmining.plugins.PBMiner.XLogReader.openLog( "data/l1.mxml" );
+				log = XLogReader.openLog( "data/l1.mxml" );
 //				log = XLogReader.openLog ( "data/s1_py.xes" );
-//				log = XLogReader.openLog ( "data/s2_wo_prefix_events_py.xes" );
 			else
-				log = org.processmining.plugins.PBMiner.XLogReader.openLog( args[ 0 ] );
+				log = XLogReader.openLog( args[ 0 ] );
 
 			printStream	= new PrintStream( outputPath + "output.txt" );
 
@@ -50,7 +49,7 @@ public class Main {
 		printStream.println( "\nProcess tree:" + pt.toString() );
 		System.out.println( "\nProcess tree:" + pt.toString( ) );
 
-		BPMNDiagram bpmn = ( BPMNDiagram ) new org.processmining.plugins.PBMiner.ProcessTree2BPMNConverter( ).convertToBPMN( pt, false )[ 0 ];
+		BPMNDiagram bpmn = ( BPMNDiagram ) new ProcessTree2BPMNConverter( ).convertToBPMN( pt, false )[ 0 ];
 		try {
 			new BpmnExportPlugin().export(
 					logProcessor.pluginContext
@@ -77,7 +76,7 @@ public class Main {
 	@UITopiaVariant (affiliation = "University of Tartu", author = "Bogdan S", email = "bogdan89@ut.ee")
 	@PluginVariant (variantLabel = "Mine a Process Tree, dialog", requiredParameterLabels = { 0 })
 	public Object mineGuiProcessTree(PluginContext context, XLog log) {
-		LogProcessor logProcessor = new LogProcessor( org.processmining.plugins.PBMiner.XLogReader.deepcopy( log ), System.out );
+		LogProcessor logProcessor = new LogProcessor( XLogReader.deepcopy( log ), System.out );
 		logProcessor.pluginContext	= context;
 		logProcessor.mine( );
 		return logProcessor.toProcessTree( );
@@ -95,7 +94,7 @@ public class Main {
 	@UITopiaVariant (affiliation = "University of Tartu", author = "Bogdan S", email = "bogdan89@ut.ee")
 	@PluginVariant (variantLabel = "Filter out branches, dialog", requiredParameterLabels = { 0 })
 	public Object[] mineGuiLogMap(PluginContext context, XLog log) {
-		LogProcessor logProcessor = new LogProcessor( org.processmining.plugins.PBMiner.XLogReader.deepcopy( log ), System.out );
+		LogProcessor logProcessor = new LogProcessor( XLogReader.deepcopy( log ), System.out );
 		logProcessor.pluginContext	= context;
 		logProcessor.mine( );
 
@@ -124,7 +123,7 @@ public class Main {
 	@UITopiaVariant (affiliation = "University of Tartu", author = "Bogdan S", email = "bogdan89@ut.ee")
 	@PluginVariant (variantLabel = "Filter out branches, dialog", requiredParameterLabels = { 0 })
 	public Object[] mineGuiLogs(PluginContext context, XLog log) {
-		LogProcessor logProcessor = new LogProcessor( org.processmining.plugins.PBMiner.XLogReader.deepcopy( log ), System.out );
+		LogProcessor logProcessor = new LogProcessor( XLogReader.deepcopy( log ), System.out );
 		logProcessor.pluginContext	= context;
 		logProcessor.mine( );
 		ArrayList<XLog> result = new ArrayList<>(  );
@@ -143,9 +142,9 @@ public class Main {
 	@UITopiaVariant (affiliation = "University of Tartu", author = "Bogdan S", email = "bogdan89@ut.ee")
 	@PluginVariant (variantLabel = "Mine a BPMN, dialog", requiredParameterLabels = { 0 })
 	public BPMNDiagram mineGuiBPMN(PluginContext context, XLog log) {
-		LogProcessor logProcessor = new LogProcessor( org.processmining.plugins.PBMiner.XLogReader.deepcopy( log ), System.out );
+		LogProcessor logProcessor = new LogProcessor( XLogReader.deepcopy( log ), System.out );
 		logProcessor.pluginContext	= context;
 		logProcessor.mine( );
-		return ( BPMNDiagram ) new org.processmining.plugins.PBMiner.ProcessTree2BPMNConverter( ).convertToBPMN( logProcessor.toProcessTree( ), false )[ 0 ];
+		return ( BPMNDiagram ) new ProcessTree2BPMNConverter( ).convertToBPMN( logProcessor.toProcessTree( ), false )[ 0 ];
 	}
 }
