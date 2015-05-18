@@ -7,17 +7,13 @@ import java.io.PrintStream;
 public class Main {
 
 	public static void main( String args[] ) throws Exception {
-		String outputPath = "./output/eval/";
-		PrintStream printStream = System.out;
-//		PrintStream printStream = new FileInputStream( outputPath + "output.txt" );
-
-		String dataPath = "C:/Users/Alle/Study/4/m/docs/data/Eval/s2/";
-
-		ProcessTree psTree = ProcessTreeFactory.ReadProcessTreeFromFile( dataPath + "pstree.ptml" );
+		/*
+		ProcessTree psTree;
+		psTree = ProcessTreeFactory.ReadProcessTreeFromFile( dataPath + "pstree.ptml" );
 //		ReduceTree.reduceTree( psTree );
 //		SaveProcessTreeToFile( dataPath + "s4.ptml", psTree );
 
-		/*GenerateLogParameters genParams = new GenerateLogParameters( 20, System.nanoTime( ) );
+		GenerateLogParameters genParams = new GenerateLogParameters( 20, System.nanoTime( ) );
 		XLog log = new GenerateLog( ).generateLog( psTree, genParams );
 
 		System.setOut( nullPrintStream );
@@ -33,18 +29,21 @@ public class Main {
 				CompareTrees.isLanguageEqual( psTree, mTree )
 		) );
 		*/
+//		runTest( "../docs/data/Eval/s1/", 20, 1000, 2, 50, 1, new int[]{ 6, 15 } );
+//		runTest( "../docs/data/Eval/s2/", 2240, 100, 10, 1000, 10, new int[]{ 6, 15 } );
+//		runTest( "../docs/data/Eval/s4/", 280, 100, 10, 1000, 10, null );
+	}
 
-		printStream = new PrintStream( outputPath + "s2_eval_suite.txt" );
-		EvalSuite s2_test = new EvalSuite( psTree, 840, 10 );
-		s2_test.run( 10, 1000, 10 );
-		printStream.println( s2_test );
-		s2_test.toCSV( outputPath + "s2_eval_suite.csv" );
+	public static void runTest( String dataDirPath, int totalDistinctTraces, int samples, int start, int stop, int step, int ...distinctCuts ) throws Exception {
+		ProcessTree psTree = ProcessTreeFactory.ReadProcessTreeFromFile( dataDirPath + "/pstree.ptml" );
+		PrintStream printStream = new PrintStream( dataDirPath + "/eval_suite.txt" );
 
-//		printStream = new PrintStream( outputPath + "s4_v4_eval_suite.txt" );
-//		EvalSuite s4_test = new EvalSuite( psTree, 280, 100 );
-//		s4_test.run( 10, 1000, 10 );
-//		printStream.println( s4_test );
-//		s4_test.toCSV( outputPath + "s4_v4_eval_suite.csv" );
+		EvalSuite test = new EvalSuite( psTree, totalDistinctTraces, samples );
+		test.distinctCuts = distinctCuts;
+		test.run( start, stop, step );
+
+		printStream.println( test );
+		test.toCSV( dataDirPath + "/eval_suite.csv" );
 	}
 
 	/*
@@ -64,26 +63,27 @@ public class Main {
 
 						2 / 3 = 75%
 
-Equal trees: 33 / 100
-Avg completeness: 69.830000 / 280
+Process Tree: S1
+Seq(S1, And(Seq(B1, B2, B3), Seq(A1, A2, A3)), S2, Xor(C, D), End)
 
-Equal trees: 39 / 100
-Avg completeness: 70.500000 / 280
+Number of tests ran: 49
+Test output format: [ Traces x Samples ( Random logs ) = Total traces ]
 
-PB Equal trees: 399 / 1000
-IM Equal trees: 870 / 1000
-Avg completeness: 70.154000 / 280
-
-PB Equal trees: 49 / 100
-IM Equal trees: 84 / 100
-Avg log completeness: 70.200000 / 280
-
-PB Equal trees: 713 / 1000
-IM Equal trees: 993 / 1000
-Avg log completeness: 87.818000 / 280
+[ 2 x 1000 = 2000 ]
+PB-Miner equal trees: 14 / 1000 = 1.4%	avg mining time: 8ms
+IM Miner equal trees: 0 / 1000 = 0.0%	avg mining time: 6ms
+Avg log completeness: 1.97 / 20 = 9.9%
 
 IM\PB	T	F
-TRUE	708	285
-FALSE	5	2
-	*/
+TRUE	0	0
+FALSE	14	986
+
+[ 3 x 1000 = 3000 ]
+PB-Miner equal trees: 96 / 1000 = 9.6%	avg mining time: 6ms
+IM Miner equal trees: 15 / 1000 = 1.5%	avg mining time: 5ms
+Avg log completeness: 2.88 / 20 = 14.4%
+
+IM\PB	T	F
+TRUE	2	13
+FALSE	94	891	*/
 }

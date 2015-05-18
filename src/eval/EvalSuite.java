@@ -1,5 +1,6 @@
 package eval;
 
+import org.processmining.plugins.InductiveMiner.conversion.ReduceTree;
 import org.processmining.processtree.ProcessTree;
 
 import java.io.FileOutputStream;
@@ -16,9 +17,11 @@ public class EvalSuite
 	public ProcessTree psTree;
 	public int totalDistinctTraces, randomLogs;
 	public Collection< EvalTest > results;
+	public int[] distinctCuts;
 
 	public EvalSuite( ProcessTree psTree, int totalDistinctTraces, int randomLogs ) {
 		this.psTree = psTree;
+		ReduceTree.reduceTree( this.psTree );
 		this.randomLogs = randomLogs;
 		this.totalDistinctTraces = totalDistinctTraces;
 		this.results = new LinkedList<>(  );
@@ -31,6 +34,12 @@ public class EvalSuite
 		}
 		this.results = tests.stream( ).map( i -> {
 					EvalTest test = new EvalTest( psTree, i, this.randomLogs );
+					if ( i % 20 == 0 )
+						System.out.println( "." );
+					else
+						System.out.print( "." );
+
+					test.distinctCuts = this.distinctCuts;
 					test.run( );
 					test.totalDistinctTraces = this.totalDistinctTraces;
 					return test;
@@ -39,7 +48,7 @@ public class EvalSuite
 	}
 
 	public String toString() {
-		return String.format( "Process Tree: %s\n%s\n\nNumber of tests ran: %d\nTest output format: [ Traces x Samples = Total random logs ]\n"
+		return String.format( "Process Tree: %s\n%s\n\nNumber of tests ran: %d\nTest output format: [ Traces x Samples ( Random logs ) = Total traces ]\n"
 				, this.psTree.getName( ), this.psTree, this.results.size()
 		) + this.results.stream( ).map( Object::toString ).collect( Collectors.joining( "\n" ) );
 	}

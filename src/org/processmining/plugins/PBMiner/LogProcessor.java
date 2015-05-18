@@ -114,7 +114,7 @@ public class LogProcessor {
 	}
 
 //	Recursively iterates over Block's children, replacing childBlocks' keys with IMProcessTree
-	public static void ProcessTreeIterator( Block root, Map< String, LogProcessor > subProcesses ) {
+	public static Block ProcessTreeIterator( Block root, Map< String, LogProcessor > subProcesses ) {
 		int i = 0;
 		for (Iterator< Node > nodeIterator = root.iterator(); nodeIterator.hasNext( ); i ++ ) {
 			Node node = nodeIterator.next();
@@ -125,14 +125,26 @@ public class LogProcessor {
 				nodeName	= nodeName.substring( 0, nodeName.indexOf( "+complete" ) );
 
 			if ( node instanceof Task.Manual && subProcesses.containsKey( nodeName ) ) {
-				node.getParents().iterator().next().swapChildAt(
-						subProcesses.get( nodeName ).toProcessTree( ).getRoot( ), i
-				);
+				Block parentBlock = node.getParents( ).iterator( ).next( );
+				Node oldChildNode = parentBlock.getChildren( ).get( i );
+
+				ProcessTree newChildProcessTree = subProcesses.get( nodeName ).toProcessTree( );
+				Node newChildNode = newChildProcessTree.getRoot( );
+
+				parentBlock.swapChildAt( newChildNode, i );
+
+				newChildNode.setProcessTree( root.getProcessTree( ) );
+				root.getProcessTree( ).removeNode( oldChildNode );
+//				root.getProcessTree( ).addNode( newChildNode );
+
+				if ( newChildNode instanceof Block )
+					newChildProcessTree.getNodes( ).stream( ).forEach( x -> root.getProcessTree( ).addNode( x ) );
 			}
 			else if ( node instanceof Block && ( ( Block ) node ).numChildren() > 0 ) {
 				ProcessTreeIterator( ( Block ) node, subProcesses );
 			}
 		}
+		return root;
 	}
 
 	public Map< String, XLog > getChildLogs() {

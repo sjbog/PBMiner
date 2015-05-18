@@ -5,12 +5,14 @@ import generation.GenerateLog;
 import generation.GenerateLogParameters;
 import org.deckfour.xes.extension.std.XExtendedEvent;
 import org.deckfour.xes.model.XLog;
+import org.processmining.plugins.InductiveMiner.conversion.ReduceTree;
 import org.processmining.plugins.InductiveMiner.plugins.IMProcessTree;
 import org.processmining.plugins.PBMiner.LogProcessor;
 import org.processmining.plugins.PBMiner.XLogReader;
 import org.processmining.processtree.ProcessTree;
 
 import java.io.PrintStream;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -29,6 +31,7 @@ public class EvalTest {
 
 	public int IMandPBEqualTrees, IMnorPBEqualTrees, IMnotPBEqualTrees, PBnotIMEqualTrees;
 	public long avgMiningTimeIM, avgMiningTimePB;
+	public int[] distinctCuts;
 
 	public EvalTest( ProcessTree targetPsTree ) {
 		this.psTree = targetPsTree;
@@ -62,6 +65,31 @@ public class EvalTest {
 		.distinct( ).count( );
 	}
 
+	public static long calcDistinctTraces( XLog log, int from, int to ) {
+		return log.parallelStream( ).map( trace ->
+						trace.stream( ).skip( from ).limit( to - from ).map( event -> {
+									XExtendedEvent xe = new XExtendedEvent( event );
+									return String.format( "%s+%s", xe.getName( ), xe.getTransition( ) );
+								}
+						).collect( Collectors.joining( "," ) )
+		)
+		.distinct( ).count( );
+	}
+
+	public static long calcDistinctTraces( XLog log, int ...cutPos ) {
+		if ( cutPos == null || cutPos.length == 0 )
+			return calcDistinctTraces( log );
+
+		List<Long> result = new LinkedList<>();
+		for ( int i = 0, prevPos = 0, pos; i < cutPos.length; i ++ ) {
+			pos = cutPos[ i ];
+			result.add( calcDistinctTraces( log, prevPos, pos ) );
+			prevPos = pos;
+		}
+
+		return result.stream().mapToLong( x -> x ).max().getAsLong();
+	}
+
 	public void reset() {
 		this.avgLogCompleteness = 0;
 		this.PBMinerEqualTrees = 0;
@@ -69,7 +97,7 @@ public class EvalTest {
 
 	public void run() {
 		GenerateLog logGenerator = new GenerateLog( );
-//		PrintStream printStream = System.out;
+		PrintStream printStream = System.out;
 
 		List< EvalTestResult > calcResult = IntStream.range( 0, this.samples ).parallel( ).mapToObj(
 				i -> {
@@ -83,6 +111,7 @@ public class EvalTest {
 						long startTimeNs = System.nanoTime( );
 						lp.mine( );
 						ProcessTree PBTree = lp.toProcessTree( );
+						ReduceTree.reduceTree( PBTree );
 
 						long elapsedPB = System.nanoTime() - startTimeNs;
 						startTimeNs = System.nanoTime( );
@@ -91,7 +120,7 @@ public class EvalTest {
 						long elapsedIM = System.nanoTime() - startTimeNs;
 
 						return new EvalTestResult(
-								( int ) calcDistinctTraces( log )
+								( int ) calcDistinctTraces( log, this.distinctCuts )
 								, CompareTrees.isLanguageEqual( this.psTree, PBTree )
 								, CompareTrees.isLanguageEqual( this.psTree, IMTree )
 								, elapsedPB, elapsedIM
@@ -104,7 +133,7 @@ public class EvalTest {
 					return new EvalTestResult( );
 				}
 		).collect( Collectors.toList( ) );
-//		System.setOut( printStream );
+		System.setOut( printStream );
 
 		this.avgLogCompleteness = calcResult.parallelStream().mapToInt(
 				EvalTestResult::getDistinctTraces
