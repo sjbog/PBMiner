@@ -6,10 +6,10 @@ import org.deckfour.xes.model.XTrace;
 import org.processmining.contexts.cli.CLIContext;
 import org.processmining.contexts.cli.CLIPluginContext;
 import org.processmining.framework.plugin.PluginContext;
-import org.processmining.plugins.PBMiner.classifiers.HeuristicEventsClassifier;
 import org.processmining.plugins.InductiveMiner.mining.MiningParameters;
 import org.processmining.plugins.InductiveMiner.mining.MiningParametersIMin;
 import org.processmining.plugins.InductiveMiner.plugins.IMProcessTree;
+import org.processmining.plugins.PBMiner.classifiers.HeuristicEventsClassifier;
 
 import java.io.PrintStream;
 import java.util.*;

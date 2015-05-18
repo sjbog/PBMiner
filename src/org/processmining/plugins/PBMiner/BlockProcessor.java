@@ -41,16 +41,12 @@ public class BlockProcessor {
 	 */
 	public List< Set< String >> FindParallelBranches( HashSet< String > processedEvents, HashSet< String > edgeEvents ) throws Exception {
 		XLog xLog = XLogReader.filterSkipEvents( this.log, processedEvents );
-		Block treeRoot = this.MineProcessTreeRoot( xLog );
-		if ( treeRoot instanceof Block.Seq )
-			treeRoot = FindFirstBlock( treeRoot );
 
 		Block treeRootEdgeEvents = this.MineProcessTreeRoot(
 				XLogReader.filterByEvents( this.log, edgeEvents )
 		);
 
 		printStream.println( "Edge tree:\t" + treeRootEdgeEvents.toString() );
-		printStream.println( "Whole tree:\t" + treeRoot.toString() );
 
 // 		TODO: check for loops
 		List< Set< String > > eventsList;
@@ -60,6 +56,12 @@ public class BlockProcessor {
 			this.updateFringeEvents( processedEvents, edgeEvents, eventsList );
 		}
 		else {
+			Block treeRoot = this.MineProcessTreeRoot( xLog );
+			if ( treeRoot instanceof Block.Seq )
+				treeRoot = FindFirstBlock( treeRoot );
+
+			printStream.println( "Whole tree:\t" + treeRoot.toString() );
+
 			eventsList = this.FindParallelBranches( treeRoot );
 			this.updateFringeEvents( processedEvents, edgeEvents, GetNodeTasks( treeRoot ) );
 		}

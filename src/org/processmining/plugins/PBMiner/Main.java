@@ -1,7 +1,10 @@
 package org.processmining.plugins.PBMiner;
 
 import org.deckfour.xes.model.XLog;
+import org.processmining.contexts.cli.CLIContext;
+import org.processmining.contexts.cli.CLIPluginContext;
 import org.processmining.contexts.uitopia.annotations.UITopiaVariant;
+import org.processmining.framework.packages.PackageDescriptor;
 import org.processmining.framework.plugin.PluginContext;
 import org.processmining.framework.plugin.annotations.Plugin;
 import org.processmining.framework.plugin.annotations.PluginVariant;
@@ -13,10 +16,16 @@ import org.processmining.processtree.ProcessTree;
 import java.io.File;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Map;
 
 
 public class Main {
+
+	public static PluginContext pluginContext = new CLIPluginContext( new CLIContext( ), "PB-Miner" );
+	public static PackageDescriptor pkg = new PackageDescriptor( "CLI PBMiner", "0.1", PackageDescriptor.OS.ALL, "", "UT",
+			"BS", "", "", "", "", false, false, new LinkedList< String >( ), new LinkedList< String >( )
+	);
 
 	public static void main ( String args[] ) {
 		String	outputPath	= "./output/";

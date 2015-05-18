@@ -1,0 +1,905 @@
+Process Tree: S4
+And(Seq(a_0, a_1, Xor(a_2, a_3), a_4, a_5, a_6), Xor(And(a_7, a_8), a_9, a_10, a_11, a_12, And(a_13, a_14)))
+
+Number of tests ran: 100
+Test output format: [ Traces x Samples = Total random logs ]
+
+[ 10 x 100 = 1000 ]
+PB-Miner equal trees: 0 / 100 = 0.0%	avg mining time: 343ms
+IM Miner equal trees: 0 / 100 = 0.0%	avg mining time: 218ms
+Avg log completeness: 9.62 / 280 = 3.4%
+
+IM\PB	T	F
+TRUE	0	0
+FALSE	0	100
+
+[ 20 x 100 = 2000 ]
+PB-Miner equal trees: 0 / 100 = 0.0%	avg mining time: 377ms
+IM Miner equal trees: 0 / 100 = 0.0%	avg mining time: 396ms
+Avg log completeness: 18.34 / 280 = 6.6%
+
+IM\PB	T	F
+TRUE	0	0
+FALSE	0	100
+
+[ 30 x 100 = 3000 ]
+PB-Miner equal trees: 1 / 100 = 1.0%	avg mining time: 138ms
+IM Miner equal trees: 0 / 100 = 0.0%	avg mining time: 217ms
+Avg log completeness: 26.55 / 280 = 9.5%
+
+IM\PB	T	F
+TRUE	0	0
+FALSE	1	99
+
+[ 40 x 100 = 4000 ]
+PB-Miner equal trees: 1 / 100 = 1.0%	avg mining time: 64ms
+IM Miner equal trees: 0 / 100 = 0.0%	avg mining time: 125ms
+Avg log completeness: 34.44 / 280 = 12.3%
+
+IM\PB	T	F
+TRUE	0	0
+FALSE	1	99
+
+[ 50 x 100 = 5000 ]
+PB-Miner equal trees: 1 / 100 = 1.0%	avg mining time: 69ms
+IM Miner equal trees: 7 / 100 = 7.0%	avg mining time: 112ms
+Avg log completeness: 41.20 / 280 = 14.7%
+
+IM\PB	T	F
+TRUE	0	7
+FALSE	1	92
+
+[ 60 x 100 = 6000 ]
+PB-Miner equal trees: 7 / 100 = 7.0%	avg mining time: 69ms
+IM Miner equal trees: 28 / 100 = 28.0%	avg mining time: 115ms
+Avg log completeness: 47.56 / 280 = 17.0%
+
+IM\PB	T	F
+TRUE	4	24
+FALSE	3	69
+
+[ 70 x 100 = 7000 ]
+PB-Miner equal trees: 11 / 100 = 11.0%	avg mining time: 49ms
+IM Miner equal trees: 61 / 100 = 61.0%	avg mining time: 110ms
+Avg log completeness: 53.75 / 280 = 19.2%
+
+IM\PB	T	F
+TRUE	8	53
+FALSE	3	36
+
+[ 80 x 100 = 8000 ]
+PB-Miner equal trees: 22 / 100 = 22.0%	avg mining time: 42ms
+IM Miner equal trees: 74 / 100 = 74.0%	avg mining time: 93ms
+Avg log completeness: 59.76 / 280 = 21.3%
+
+IM\PB	T	F
+TRUE	16	58
+FALSE	6	20
+
+[ 90 x 100 = 9000 ]
+PB-Miner equal trees: 33 / 100 = 33.0%	avg mining time: 44ms
+IM Miner equal trees: 75 / 100 = 75.0%	avg mining time: 102ms
+Avg log completeness: 64.92 / 280 = 23.2%
+
+IM\PB	T	F
+TRUE	27	48
+FALSE	6	19
+
+[ 100 x 100 = 10000 ]
+PB-Miner equal trees: 37 / 100 = 37.0%	avg mining time: 40ms
+IM Miner equal trees: 88 / 100 = 88.0%	avg mining time: 110ms
+Avg log completeness: 70.41 / 280 = 25.1%
+
+IM\PB	T	F
+TRUE	31	57
+FALSE	6	6
+
+[ 110 x 100 = 11000 ]
+PB-Miner equal trees: 52 / 100 = 52.0%	avg mining time: 54ms
+IM Miner equal trees: 93 / 100 = 93.0%	avg mining time: 141ms
+Avg log completeness: 75.05 / 280 = 26.8%
+
+IM\PB	T	F
+TRUE	50	43
+FALSE	2	5
+
+[ 120 x 100 = 12000 ]
+PB-Miner equal trees: 58 / 100 = 58.0%	avg mining time: 49ms
+IM Miner equal trees: 97 / 100 = 97.0%	avg mining time: 128ms
+Avg log completeness: 79.61 / 280 = 28.4%
+
+IM\PB	T	F
+TRUE	57	40
+FALSE	1	2
+
+[ 130 x 100 = 13000 ]
+PB-Miner equal trees: 58 / 100 = 58.0%	avg mining time: 44ms
+IM Miner equal trees: 99 / 100 = 99.0%	avg mining time: 133ms
+Avg log completeness: 83.38 / 280 = 29.8%
+
+IM\PB	T	F
+TRUE	57	42
+FALSE	1	0
+
+[ 140 x 100 = 14000 ]
+PB-Miner equal trees: 67 / 100 = 67.0%	avg mining time: 47ms
+IM Miner equal trees: 98 / 100 = 98.0%	avg mining time: 139ms
+Avg log completeness: 88.18 / 280 = 31.5%
+
+IM\PB	T	F
+TRUE	66	32
+FALSE	1	1
+
+[ 150 x 100 = 15000 ]
+PB-Miner equal trees: 70 / 100 = 70.0%	avg mining time: 49ms
+IM Miner equal trees: 99 / 100 = 99.0%	avg mining time: 151ms
+Avg log completeness: 90.84 / 280 = 32.4%
+
+IM\PB	T	F
+TRUE	70	29
+FALSE	0	1
+
+[ 160 x 100 = 16000 ]
+PB-Miner equal trees: 80 / 100 = 80.0%	avg mining time: 51ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 156ms
+Avg log completeness: 95.01 / 280 = 33.9%
+
+IM\PB	T	F
+TRUE	80	20
+FALSE	0	0
+
+[ 170 x 100 = 17000 ]
+PB-Miner equal trees: 82 / 100 = 82.0%	avg mining time: 56ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 161ms
+Avg log completeness: 99.22 / 280 = 35.4%
+
+IM\PB	T	F
+TRUE	82	18
+FALSE	0	0
+
+[ 180 x 100 = 18000 ]
+PB-Miner equal trees: 88 / 100 = 88.0%	avg mining time: 56ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 169ms
+Avg log completeness: 101.89 / 280 = 36.4%
+
+IM\PB	T	F
+TRUE	88	12
+FALSE	0	0
+
+[ 190 x 100 = 19000 ]
+PB-Miner equal trees: 90 / 100 = 90.0%	avg mining time: 59ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 175ms
+Avg log completeness: 105.42 / 280 = 37.7%
+
+IM\PB	T	F
+TRUE	90	10
+FALSE	0	0
+
+[ 200 x 100 = 20000 ]
+PB-Miner equal trees: 90 / 100 = 90.0%	avg mining time: 65ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 181ms
+Avg log completeness: 107.31 / 280 = 38.3%
+
+IM\PB	T	F
+TRUE	90	10
+FALSE	0	0
+
+[ 210 x 100 = 21000 ]
+PB-Miner equal trees: 95 / 100 = 95.0%	avg mining time: 64ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 185ms
+Avg log completeness: 111.98 / 280 = 40.0%
+
+IM\PB	T	F
+TRUE	95	5
+FALSE	0	0
+
+[ 220 x 100 = 22000 ]
+PB-Miner equal trees: 95 / 100 = 95.0%	avg mining time: 68ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 183ms
+Avg log completeness: 114.72 / 280 = 41.0%
+
+IM\PB	T	F
+TRUE	95	5
+FALSE	0	0
+
+[ 230 x 100 = 23000 ]
+PB-Miner equal trees: 93 / 100 = 93.0%	avg mining time: 70ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 185ms
+Avg log completeness: 116.90 / 280 = 41.8%
+
+IM\PB	T	F
+TRUE	93	7
+FALSE	0	0
+
+[ 240 x 100 = 24000 ]
+PB-Miner equal trees: 98 / 100 = 98.0%	avg mining time: 73ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 189ms
+Avg log completeness: 120.36 / 280 = 43.0%
+
+IM\PB	T	F
+TRUE	98	2
+FALSE	0	0
+
+[ 250 x 100 = 25000 ]
+PB-Miner equal trees: 99 / 100 = 99.0%	avg mining time: 75ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 175ms
+Avg log completeness: 123.15 / 280 = 44.0%
+
+IM\PB	T	F
+TRUE	99	1
+FALSE	0	0
+
+[ 260 x 100 = 26000 ]
+PB-Miner equal trees: 98 / 100 = 98.0%	avg mining time: 78ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 176ms
+Avg log completeness: 124.88 / 280 = 44.6%
+
+IM\PB	T	F
+TRUE	98	2
+FALSE	0	0
+
+[ 270 x 100 = 27000 ]
+PB-Miner equal trees: 97 / 100 = 97.0%	avg mining time: 82ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 173ms
+Avg log completeness: 127.51 / 280 = 45.5%
+
+IM\PB	T	F
+TRUE	97	3
+FALSE	0	0
+
+[ 280 x 100 = 28000 ]
+PB-Miner equal trees: 99 / 100 = 99.0%	avg mining time: 85ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 170ms
+Avg log completeness: 130.91 / 280 = 46.8%
+
+IM\PB	T	F
+TRUE	99	1
+FALSE	0	0
+
+[ 290 x 100 = 29000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 87ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 168ms
+Avg log completeness: 132.40 / 280 = 47.3%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 300 x 100 = 30000 ]
+PB-Miner equal trees: 99 / 100 = 99.0%	avg mining time: 93ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 156ms
+Avg log completeness: 135.26 / 280 = 48.3%
+
+IM\PB	T	F
+TRUE	99	1
+FALSE	0	0
+
+[ 310 x 100 = 31000 ]
+PB-Miner equal trees: 99 / 100 = 99.0%	avg mining time: 93ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 154ms
+Avg log completeness: 137.36 / 280 = 49.1%
+
+IM\PB	T	F
+TRUE	99	1
+FALSE	0	0
+
+[ 320 x 100 = 32000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 97ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 143ms
+Avg log completeness: 140.87 / 280 = 50.3%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 330 x 100 = 33000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 100ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 131ms
+Avg log completeness: 141.76 / 280 = 50.6%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 340 x 100 = 34000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 104ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 130ms
+Avg log completeness: 143.68 / 280 = 51.3%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 350 x 100 = 35000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 106ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 120ms
+Avg log completeness: 144.27 / 280 = 51.5%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 360 x 100 = 36000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 109ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 118ms
+Avg log completeness: 148.24 / 280 = 52.9%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 370 x 100 = 37000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 113ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 114ms
+Avg log completeness: 150.01 / 280 = 53.6%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 380 x 100 = 38000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 116ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 100ms
+Avg log completeness: 151.92 / 280 = 54.3%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 390 x 100 = 39000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 120ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 86ms
+Avg log completeness: 156.02 / 280 = 55.7%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 400 x 100 = 40000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 123ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 85ms
+Avg log completeness: 156.47 / 280 = 55.9%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 410 x 100 = 41000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 126ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 71ms
+Avg log completeness: 157.61 / 280 = 56.3%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 420 x 100 = 42000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 130ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 100ms
+Avg log completeness: 159.64 / 280 = 57.0%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 430 x 100 = 43000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 133ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 69ms
+Avg log completeness: 160.82 / 280 = 57.4%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 440 x 100 = 44000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 136ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 71ms
+Avg log completeness: 163.55 / 280 = 58.4%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 450 x 100 = 45000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 140ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 64ms
+Avg log completeness: 164.96 / 280 = 58.9%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 460 x 100 = 46000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 143ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 73ms
+Avg log completeness: 166.35 / 280 = 59.4%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 470 x 100 = 47000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 147ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 55ms
+Avg log completeness: 169.77 / 280 = 60.6%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 480 x 100 = 48000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 150ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 69ms
+Avg log completeness: 170.04 / 280 = 60.7%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 490 x 100 = 49000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 152ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 66ms
+Avg log completeness: 172.00 / 280 = 61.4%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 500 x 100 = 50000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 156ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 74ms
+Avg log completeness: 173.19 / 280 = 61.9%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 510 x 100 = 51000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 159ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 66ms
+Avg log completeness: 173.76 / 280 = 62.1%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 520 x 100 = 52000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 164ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 47ms
+Avg log completeness: 176.61 / 280 = 63.1%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 530 x 100 = 53000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 165ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 63ms
+Avg log completeness: 177.63 / 280 = 63.4%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 540 x 100 = 54000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 170ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 52ms
+Avg log completeness: 179.88 / 280 = 64.2%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 550 x 100 = 55000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 173ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 52ms
+Avg log completeness: 180.49 / 280 = 64.5%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 560 x 100 = 56000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 177ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 51ms
+Avg log completeness: 182.75 / 280 = 65.3%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 570 x 100 = 57000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 179ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 58ms
+Avg log completeness: 183.29 / 280 = 65.5%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 580 x 100 = 58000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 183ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 49ms
+Avg log completeness: 186.00 / 280 = 66.4%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 590 x 100 = 59000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 190ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 43ms
+Avg log completeness: 187.21 / 280 = 66.9%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 600 x 100 = 60000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 189ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 50ms
+Avg log completeness: 187.11 / 280 = 66.8%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 610 x 100 = 61000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 194ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 50ms
+Avg log completeness: 190.46 / 280 = 68.0%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 620 x 100 = 62000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 196ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 47ms
+Avg log completeness: 190.28 / 280 = 68.0%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 630 x 100 = 63000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 200ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 50ms
+Avg log completeness: 192.72 / 280 = 68.8%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 640 x 100 = 64000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 203ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 46ms
+Avg log completeness: 192.43 / 280 = 68.7%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 650 x 100 = 65000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 206ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 51ms
+Avg log completeness: 195.67 / 280 = 69.9%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 660 x 100 = 66000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 209ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 48ms
+Avg log completeness: 196.14 / 280 = 70.1%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 670 x 100 = 67000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 213ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 47ms
+Avg log completeness: 198.05 / 280 = 70.7%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 680 x 100 = 68000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 218ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 47ms
+Avg log completeness: 198.94 / 280 = 71.1%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 690 x 100 = 69000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 219ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 52ms
+Avg log completeness: 199.71 / 280 = 71.3%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 700 x 100 = 70000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 223ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 51ms
+Avg log completeness: 202.05 / 280 = 72.2%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 710 x 100 = 71000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 227ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 52ms
+Avg log completeness: 203.15 / 280 = 72.6%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 720 x 100 = 72000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 230ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 53ms
+Avg log completeness: 204.05 / 280 = 72.9%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 730 x 100 = 73000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 232ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 56ms
+Avg log completeness: 204.39 / 280 = 73.0%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 740 x 100 = 74000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 234ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 57ms
+Avg log completeness: 205.78 / 280 = 73.5%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 750 x 100 = 75000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 242ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 51ms
+Avg log completeness: 207.77 / 280 = 74.2%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 760 x 100 = 76000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 244ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 51ms
+Avg log completeness: 207.50 / 280 = 74.1%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 770 x 100 = 77000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 248ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 53ms
+Avg log completeness: 209.70 / 280 = 74.9%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 780 x 100 = 78000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 250ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 57ms
+Avg log completeness: 208.50 / 280 = 74.5%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 790 x 100 = 79000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 254ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 55ms
+Avg log completeness: 210.14 / 280 = 75.1%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 800 x 100 = 80000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 257ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 55ms
+Avg log completeness: 212.34 / 280 = 75.8%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 810 x 100 = 81000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 260ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 59ms
+Avg log completeness: 212.12 / 280 = 75.8%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 820 x 100 = 82000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 262ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 60ms
+Avg log completeness: 213.90 / 280 = 76.4%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 830 x 100 = 83000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 268ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 58ms
+Avg log completeness: 214.37 / 280 = 76.6%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 840 x 100 = 84000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 272ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 58ms
+Avg log completeness: 215.77 / 280 = 77.1%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 850 x 100 = 85000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 276ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 59ms
+Avg log completeness: 216.13 / 280 = 77.2%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 860 x 100 = 86000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 277ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 62ms
+Avg log completeness: 217.93 / 280 = 77.8%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 870 x 100 = 87000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 281ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 62ms
+Avg log completeness: 218.24 / 280 = 77.9%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 880 x 100 = 88000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 285ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 61ms
+Avg log completeness: 220.16 / 280 = 78.6%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 890 x 100 = 89000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 297ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 64ms
+Avg log completeness: 220.64 / 280 = 78.8%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 900 x 100 = 90000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 330ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 71ms
+Avg log completeness: 220.99 / 280 = 78.9%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 910 x 100 = 91000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 340ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 71ms
+Avg log completeness: 222.76 / 280 = 79.6%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 920 x 100 = 92000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 342ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 71ms
+Avg log completeness: 222.19 / 280 = 79.4%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 930 x 100 = 93000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 344ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 73ms
+Avg log completeness: 224.14 / 280 = 80.1%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 940 x 100 = 94000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 351ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 74ms
+Avg log completeness: 224.85 / 280 = 80.3%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 950 x 100 = 95000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 354ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 75ms
+Avg log completeness: 225.93 / 280 = 80.7%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 960 x 100 = 96000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 355ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 74ms
+Avg log completeness: 226.88 / 280 = 81.0%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 970 x 100 = 97000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 360ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 76ms
+Avg log completeness: 227.60 / 280 = 81.3%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 980 x 100 = 98000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 362ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 76ms
+Avg log completeness: 227.62 / 280 = 81.3%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 990 x 100 = 99000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 369ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 79ms
+Avg log completeness: 228.67 / 280 = 81.7%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
+
+[ 1000 x 100 = 100000 ]
+PB-Miner equal trees: 100 / 100 = 100.0%	avg mining time: 371ms
+IM Miner equal trees: 100 / 100 = 100.0%	avg mining time: 78ms
+Avg log completeness: 229.74 / 280 = 82.1%
+
+IM\PB	T	F
+TRUE	100	0
+FALSE	0	0
