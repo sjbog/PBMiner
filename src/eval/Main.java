@@ -1,20 +1,25 @@
 package eval;
 
 import org.processmining.processtree.ProcessTree;
+import org.processmining.processtree.impl.ProcessTreeImpl;
 
 import java.io.PrintStream;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Main {
 
 	public static void main( String args[] ) throws Exception {
 		/*
-		ProcessTree psTree;
-		psTree = ProcessTreeFactory.ReadProcessTreeFromFile( dataPath + "pstree.ptml" );
-//		ReduceTree.reduceTree( psTree );
-//		SaveProcessTreeToFile( dataPath + "s4.ptml", psTree );
+		ProcessTree psTrees;
+		psTrees = ProcessTreeFactory.ReadProcessTreeFromFile( dataPath + "pstree.ptml" );
+//		ReduceTree.reduceTree( psTrees );
+//		SaveProcessTreeToFile( dataPath + "s4.ptml", psTrees );
 
 		GenerateLogParameters genParams = new GenerateLogParameters( 20, System.nanoTime( ) );
-		XLog log = new GenerateLog( ).generateLog( psTree, genParams );
+		XLog log = new GenerateLog( ).generateLog( psTrees, genParams );
 
 		System.setOut( nullPrintStream );
 		LogProcessor lp = new LogProcessor( XLogReader.deepcopy( log ));
@@ -26,12 +31,49 @@ public class Main {
 		printStream.println( mTree );
 
 		printStream.println( String.format( "\nAre equal? - %s",
-				CompareTrees.isLanguageEqual( psTree, mTree )
+				CompareTrees.isLanguageEqual( psTrees, mTree )
 		) );
 		*/
-//		runTest( "../docs/data/Eval/s1/", 20, 1000, 2, 50, 1, new int[]{ 6, 15 } );
-//		runTest( "../docs/data/Eval/s2/", 2240, 100, 10, 1000, 10, new int[]{ 6, 15 } );
-//		runTest( "../docs/data/Eval/s4/", 280, 100, 10, 1000, 10, null );
+//		ProcessTree psTrees = ProcessTreeFactory.ReadProcessTreeFromFile( "C:/Users/Alle/Study/4/m/docs/data/Eval/s6/pstree.ptml" );
+//		System.out.println( psTrees );
+//		ReduceTree.reduceTree( psTrees );
+//		ProcessTreeFactory.SaveProcessTreeToFile( "C:/Users/Alle/Study/4/m/docs/data/Eval/s6/pstree2.ptml", psTrees );
+//		System.out.println( psTrees );
+		runPerfTest( "../docs/data/Eval/", 100, "s1", "s2", "s3", "s4", "s5", "s6" );
+
+		runTest( "../docs/data/Eval/s1/", 20, 1000, 2, 50, 1, new int[]{ 6, 15 } );
+		runTest( "../docs/data/Eval/s2/", 2240, 100, 10, 1000, 10, new int[]{ 6, 15 } );
+		runTest( "../docs/data/Eval/s3/", 10656, 100, 10, 1000, 10, null );
+		runTest( "../docs/data/Eval/s4/", 280, 100, 10, 1000, 10, null );
+		runTest( "../docs/data/Eval/s5/", 221760, 100, 10, 1000, 10, null );
+		runTest( "../docs/data/Eval/s6/", 102960, 100, 10, 1000, 10, null );
+	}
+
+	public static void runPerfTest( String dataDirPath, int samples ) throws Exception {
+		ProcessTree psTree = ProcessTreeFactory.ReadProcessTreeFromFile( dataDirPath + "/pstree.ptml" );
+
+		EvalSuite test = new EvalSuite( psTree, 100, samples );
+		test.run( IntStream.of( 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768 ) );
+
+		test.toCSV( dataDirPath + "/perf_suite.csv" );
+	}
+
+	public static void runPerfTest( String dataDirPath, int samples, String ...treeDirs ) throws Exception {
+
+		List< ProcessTree > trees = Arrays.asList( treeDirs ).stream( ).map( x -> {
+			try {
+				return ProcessTreeFactory.ReadProcessTreeFromFile( dataDirPath + x + "/pstree.ptml" );
+			} catch ( Exception e ) {
+				e.printStackTrace( );
+				return new ProcessTreeImpl( );
+			}
+		} ).collect( Collectors.toList( ) );
+
+		PerfSuite test = new PerfSuite( samples, trees );
+//		test.run( IntStream.of( 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768 ) );
+		test.run( IntStream.of( 100, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000 ) );
+
+		test.toCSV( dataDirPath + "/perf_suite_multi.csv" );
 	}
 
 	public static void runTest( String dataDirPath, int totalDistinctTraces, int samples, int start, int stop, int step, int ...distinctCuts ) throws Exception {

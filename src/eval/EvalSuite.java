@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class EvalSuite
 {
@@ -28,17 +29,13 @@ public class EvalSuite
 	}
 
 	public void run( int startTraces, int endTraces, int step ) {
-		List< Integer > tests = new LinkedList<>( );
-		for ( int i = startTraces; i <= endTraces; i += step ) {
-			tests.add( i );
-		}
-		this.results = tests.stream( ).map( i -> {
-					EvalTest test = new EvalTest( psTree, i, this.randomLogs );
-					if ( i % 20 == 0 )
-						System.out.println( "." );
-					else
-						System.out.print( "." );
+		this.run( IntStream.iterate( startTraces, i -> i + step ).limit( 1 + ( endTraces - startTraces ) / step ) );
+	}
 
+	public void run( IntStream intStream ) {
+		this.results = intStream.mapToObj( i -> {
+					System.out.println( i );
+					EvalTest test = new EvalTest( psTree, i, this.randomLogs );
 					test.distinctCuts = this.distinctCuts;
 					test.run( );
 					test.totalDistinctTraces = this.totalDistinctTraces;
@@ -59,11 +56,13 @@ public class EvalSuite
 				"total_traces", "avg_distinct_traces", "avg_log_completeness_percent"
 				, "PB_discovery_percent", "IM_discovery_percent"
 				, "avg_PB_mining_time_ms", "avg_IM_mining_time_ms"
+				, "min_PB_mining_time_ms", "min_IM_mining_time_ms"
+				, "max_PB_mining_time_ms", "max_IM_mining_time_ms"
 		);
 		csvFile.println( header.stream().collect( Collectors.joining(",") ) );
 		csvFile.println(
 				this.results.stream( ).map( x ->
-					String.format( "%d,%.1f,%.1f,%.1f,%.1f,%d,%d"
+					String.format( "%d,%.1f,%.1f,%.1f,%.1f,%d,%d,%d,%d,%d,%d"
 							, x.tracesPerLog
 							, x.avgLogCompleteness
 							, 100.0 * x.avgLogCompleteness / x.totalDistinctTraces
@@ -72,6 +71,8 @@ public class EvalSuite
 							, 100.0 * x.IMMinerEqualTrees / x.samples
 
 							, x.avgMiningTimePB, x.avgMiningTimeIM
+							, x.minMiningTimePB, x.minMiningTimeIM
+							, x.maxMiningTimePB, x.maxMiningTimeIM
 					)
 			).collect( Collectors.joining( "\n" ) )
 		);

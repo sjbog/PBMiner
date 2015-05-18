@@ -12,8 +12,10 @@ import org.processmining.plugins.PBMiner.XLogReader;
 import org.processmining.processtree.ProcessTree;
 
 import java.io.PrintStream;
+import java.util.IntSummaryStatistics;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.LongSummaryStatistics;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -27,10 +29,11 @@ public class EvalTest {
 	public static PrintStream nullPrintStream = new NullPrintStream( );
 
 	public double avgLogCompleteness;
+	public int maxLogCompleteness, minLogCompleteness;
 	public int PBMinerEqualTrees, IMMinerEqualTrees;
 
 	public int IMandPBEqualTrees, IMnorPBEqualTrees, IMnotPBEqualTrees, PBnotIMEqualTrees;
-	public long avgMiningTimeIM, avgMiningTimePB;
+	public long avgMiningTimeIM, minMiningTimeIM, maxMiningTimeIM, avgMiningTimePB, minMiningTimePB, maxMiningTimePB;
 	public int[] distinctCuts;
 
 	public EvalTest( ProcessTree targetPsTree ) {
@@ -135,14 +138,25 @@ public class EvalTest {
 		).collect( Collectors.toList( ) );
 		System.setOut( printStream );
 
-		this.avgLogCompleteness = calcResult.parallelStream().mapToInt(
-				EvalTestResult::getDistinctTraces
-		).average().getAsDouble();
+		IntSummaryStatistics stats = calcResult.parallelStream( ).mapToInt( EvalTestResult:: getDistinctTraces ).summaryStatistics( );
+		this.avgLogCompleteness = stats.getAverage();
+		this.maxLogCompleteness = stats.getMax();
+		this.minLogCompleteness = stats.getMin( );
 
 		this.PBMinerEqualTrees = calcResult.parallelStream().mapToInt( EvalTestResult::PBMinerResult ).sum();
 		this.IMMinerEqualTrees = calcResult.parallelStream().mapToInt( EvalTestResult::IMMinerResult ).sum();
-		this.avgMiningTimePB = ( long )( calcResult.parallelStream().mapToLong( o -> o.PBMiningTimeNs ).average().getAsDouble() / 1e6 );
-		this.avgMiningTimeIM = ( long )( calcResult.parallelStream().mapToLong( o -> o.IMMiningTimeNs ).average().getAsDouble() / 1e6 );
+
+		LongSummaryStatistics PBstats = calcResult.parallelStream( ).mapToLong( o -> o.PBMiningTimeNs ).summaryStatistics( );
+		LongSummaryStatistics IMstats = calcResult.parallelStream( ).mapToLong( o -> o.IMMiningTimeNs ).summaryStatistics( );
+
+		this.avgMiningTimePB = ( long ) ( PBstats.getAverage( ) / 1e6 );
+		this.avgMiningTimeIM = ( long ) ( IMstats.getAverage( ) / 1e6 );
+
+		this.minMiningTimePB = ( long ) ( PBstats.getMin( ) / 1e6 );
+		this.maxMiningTimePB = ( long ) ( PBstats.getMax( ) / 1e6 );
+
+		this.minMiningTimeIM = ( long ) ( IMstats.getMin( ) / 1e6 );
+		this.maxMiningTimeIM = ( long ) ( IMstats.getMax( ) / 1e6 );
 
 		this.IMandPBEqualTrees = calcResult.parallelStream().mapToInt( o -> o.IMMinerResult && o.PBMinerResult ? 1 : 0 ).sum();
 		this.IMnorPBEqualTrees = calcResult.parallelStream().mapToInt( o -> ! o.IMMinerResult && ! o.PBMinerResult ? 1 : 0 ).sum();
@@ -153,12 +167,12 @@ public class EvalTest {
 	public String toString( ) {
 		return String.format( "\n[ %d x %d = %d ]"
 				, this.tracesPerLog, this.samples, this.tracesPerLog * this.samples
-		) + String.format( "\nPB-Miner equal trees: %d / %d = %.1f%%\tavg mining time: %dms"
-				, this.PBMinerEqualTrees, this.samples, 100.0 * this.PBMinerEqualTrees / this.samples, this.avgMiningTimePB
-		) + String.format( "\nIM Miner equal trees: %d / %d = %.1f%%\tavg mining time: %dms"
-				, this.IMMinerEqualTrees, this.samples, 100.0 * this.IMMinerEqualTrees / this.samples, this.avgMiningTimeIM
-		) + String.format( "\nAvg log completeness: %.2f / %d = %.1f%%"
-				, this.avgLogCompleteness, this.totalDistinctTraces, 100.0 * this.avgLogCompleteness / this.totalDistinctTraces
+		) + String.format( "\nPB-Miner equal trees: %d / %d = %.1f%%, avg mining time: %dms, min mining time: %dms, max mining time: %dms"
+				, this.PBMinerEqualTrees, this.samples, 100.0 * this.PBMinerEqualTrees / this.samples, this.avgMiningTimePB, this.minMiningTimePB, this.maxMiningTimePB
+		) + String.format( "\nIM Miner equal trees: %d / %d = %.1f%%, avg mining time: %dms, min mining time: %dms, max mining time: %dms"
+				, this.IMMinerEqualTrees, this.samples, 100.0 * this.IMMinerEqualTrees / this.samples, this.avgMiningTimeIM, this.minMiningTimeIM, this.maxMiningTimeIM
+		) + String.format( "\nAvg log completeness: %.2f / %d = %.1f%%, min = %d, max = %d"
+				, this.avgLogCompleteness, this.totalDistinctTraces, 100.0 * this.avgLogCompleteness / this.totalDistinctTraces, this.minLogCompleteness, this.maxLogCompleteness
 		) + String.format( "\n\nIM\\PB\tT\tF\nTRUE\t%d\t%d\nFALSE\t%d\t%d"
 				, this.IMandPBEqualTrees, this.IMnotPBEqualTrees
 				, this.PBnotIMEqualTrees, this.IMnorPBEqualTrees
