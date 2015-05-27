@@ -11,6 +11,7 @@ import org.processmining.processtree.Task;
 
 import java.io.PrintStream;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class BlockProcessor {
 
@@ -169,8 +170,9 @@ public class BlockProcessor {
 		if ( ! ( node instanceof Block.And ) )
 			return result;
 
-		for ( Node child : ( ( Block ) node ).getChildren( ) )
-			result.add( GetNodeTasks( child ) );
+		result.addAll( ( ( Block ) node ).getChildren( ).stream( )
+				.map( BlockProcessor:: GetNodeTasks ).collect( Collectors.toList( ) )
+		);
 
 		return result;
 	}

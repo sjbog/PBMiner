@@ -34,8 +34,8 @@ public class Main {
 
 		try {
 			if ( args.length == 0 )
-				log = XLogReader.openLog( "data/l1.mxml" );
-//				log = XLogReader.openLog ( "data/s1_py.xes" );
+//				log = XLogReader.openLog( "data/l1.mxml" );
+				log = XLogReader.openLog ( "../docs/data/limitations/se.xes" );
 			else
 				log = XLogReader.openLog( args[ 0 ] );
 

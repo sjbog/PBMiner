@@ -4,10 +4,7 @@ import org.deckfour.xes.extension.std.XConceptExtension;
 import org.deckfour.xes.extension.std.XExtendedEvent;
 import org.deckfour.xes.factory.XFactory;
 import org.deckfour.xes.factory.XFactoryRegistry;
-import org.deckfour.xes.in.XMxmlGZIPParser;
-import org.deckfour.xes.in.XMxmlParser;
-import org.deckfour.xes.in.XesXmlGZIPParser;
-import org.deckfour.xes.in.XesXmlParser;
+import org.deckfour.xes.in.*;
 import org.deckfour.xes.info.XLogInfo;
 import org.deckfour.xes.info.impl.XLogInfoImpl;
 import org.deckfour.xes.model.XAttributeMap;
@@ -17,7 +14,9 @@ import org.deckfour.xes.model.XTrace;
 
 import java.io.File;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class XLogReader {
 	public static XFactory factory = XFactoryRegistry.instance( ).currentDefault( );
@@ -25,45 +24,26 @@ public class XLogReader {
 
 	public static XLog openLog( String inputLogFileName ) throws Exception {
 		XLog log = null;
+		XParser parser;
+		File inputFile = new File( inputLogFileName );
 
 		if ( inputLogFileName.toLowerCase( ).contains( "mxml.gz" ) ) {
-			XMxmlGZIPParser parser = new XMxmlGZIPParser( );
-			if ( parser.canParse( new File( inputLogFileName ) ) ) {
-				try {
-					log = parser.parse( new File( inputLogFileName ) ).get( 0 );
-				} catch ( Exception e ) {
-					e.printStackTrace( );
-				}
-			}
-		} else if ( inputLogFileName.toLowerCase( ).contains( "mxml" ) ||
-				inputLogFileName.toLowerCase( ).contains( "xml" ) ) {
-			XMxmlParser parser = new XMxmlParser( );
-			if ( parser.canParse( new File( inputLogFileName ) ) ) {
-				try {
-					log = parser.parse( new File( inputLogFileName ) ).get( 0 );
-				} catch ( Exception e ) {
-					e.printStackTrace( );
-				}
-			}
+			parser = new XMxmlGZIPParser( );
+		} else if ( inputLogFileName.toLowerCase( ).contains( "mxml" ) || inputLogFileName.toLowerCase( ).contains( "xml" ) ) {
+			parser = new XMxmlParser( );
 		} else if ( inputLogFileName.toLowerCase( ).contains( "xes.gz" ) ) {
-			XesXmlGZIPParser parser = new XesXmlGZIPParser( );
-			if ( parser.canParse( new File( inputLogFileName ) ) ) {
-				try {
-					log = parser.parse( new File( inputLogFileName ) ).get( 0 );
-				} catch ( Exception e ) {
-					e.printStackTrace( );
-				}
-			}
+			parser = new XesXmlGZIPParser( );
 		} else if ( inputLogFileName.toLowerCase( ).contains( "xes" ) ) {
-			XesXmlParser parser = new XesXmlParser( );
-			if ( parser.canParse( new File( inputLogFileName ) ) ) {
-				try {
-					log = parser.parse( new File( inputLogFileName ) ).get( 0 );
-				} catch ( Exception e ) {
-					e.printStackTrace( );
-				}
-			}
+			parser = new XesXmlParser( );
+		} else {
+			throw new Exception( "Unknown log format" );
 		}
+		if ( parser.canParse( inputFile ) )
+			try {
+				log = parser.parse( inputFile ).get( 0 );
+			} catch ( Exception e ) {
+				e.printStackTrace( );
+			}
 		if ( log == null )
 			throw new Exception( "Couldn't read log file" );
 		return log;
@@ -78,58 +58,38 @@ public class XLogReader {
 		return log;
 	}
 
-	public static XLog filterByEvents( XLog log, Set< String > targetEvents ) {
+	public static XLog filterEventsFn( XLog log, Predicate<XEvent> fn ) {
 		XLog filteredLog	= factory.createLog( ( XAttributeMap ) log.getAttributes( ).clone( ) );
-		XLogInfo logInfo	= XLogInfoImpl.create( log, LogProcessor.defaultXEventClassifier );
-		XTrace filteredTrace;
-
-		for ( XTrace trace : log ) {
-			filteredTrace	= factory.createTrace ( ( XAttributeMap ) trace.getAttributes ().clone() );
-
-			for ( XEvent event : trace ) {
-				if ( targetEvents.contains( fetchName( event, logInfo ) ) )
-					filteredTrace.add( event );
-			}
-			if ( filteredTrace.size() > 0 )
-				filteredLog.add( filteredTrace );
-		}
+		filteredLog.addAll(
+				log.parallelStream()
+						.map( trace -> {
+							XTrace filteredTrace = factory.createTrace( ( XAttributeMap ) trace.getAttributes( ).clone( ) );
+							filteredTrace.addAll(
+									trace.stream( ).filter( fn )
+											.map( event -> factory.createEvent( ( XAttributeMap ) event.getAttributes( ).clone( ) ) )
+											.collect( Collectors.toList( ) )
+							);
+							return filteredTrace;
+						} )
+						.filter( filteredTrace -> filteredTrace.size( ) > 0 )
+						.collect( Collectors.toList( ) )
+		);
 		return filteredLog;
+	}
+
+	public static XLog filterByEvents( XLog log, Set< String > targetEvents ) {
+		XLogInfo logInfo	= XLogInfoImpl.create( log, LogProcessor.defaultXEventClassifier );
+		return filterEventsFn( log, e -> targetEvents.contains( fetchName( e, logInfo ) ) );
 	}
 
 	public static XLog filterByEvents( XLog log, String eventNamePrefix ) {
-		XLog filteredLog	= factory.createLog( ( XAttributeMap ) log.getAttributes( ).clone( ) );
 		XLogInfo logInfo	= XLogInfoImpl.create( log, LogProcessor.defaultXEventClassifier );
-		XTrace filteredTrace;
-
-		for ( XTrace trace : log ) {
-			filteredTrace	= factory.createTrace ( ( XAttributeMap ) trace.getAttributes ().clone() );
-
-			for ( XEvent event : trace ) {
-				if ( fetchName( event, logInfo ).startsWith( eventNamePrefix ) )
-					filteredTrace.add( event );
-			}
-			if ( filteredTrace.size() > 0 )
-				filteredLog.add( filteredTrace );
-		}
-		return filteredLog;
+		return filterEventsFn( log, event -> fetchName( event, logInfo ).startsWith( eventNamePrefix ) );
 	}
 
 	public static XLog filterSkipEvents( XLog log, Set< String > targetEvents ) {
-		XLog filteredLog	= factory.createLog( ( XAttributeMap ) log.getAttributes( ).clone( ) );
 		XLogInfo logInfo	= XLogInfoImpl.create( log, LogProcessor.defaultXEventClassifier );
-		XTrace filteredTrace;
-
-		for ( XTrace trace : log ) {
-			filteredTrace	= factory.createTrace ( ( XAttributeMap ) trace.getAttributes ().clone() );
-
-			for ( XEvent event : trace ) {
-				if ( ! targetEvents.contains( fetchName( event, logInfo ) ) )
-					filteredTrace.add( event );
-			}
-			if ( filteredTrace.size() > 0 )
-				filteredLog.add( filteredTrace );
-		}
-		return filteredLog;
+		return filterEventsFn( log, event -> ! targetEvents.contains( fetchName( event, logInfo ) ) );
 	}
 
 	public static XLog filterTracesWithoutEvents( XLog log, Set< String > targetEvents ) {
@@ -176,23 +136,20 @@ public class XLogReader {
 	}
 
 	public static XLog deepcopy( XLog log ) {
-		XLog logCopy	= factory.createLog( );
-		logCopy.setAttributes( log.getAttributes() );
-		XTrace traceCopy;
+		Stream< XTrace > data = log.parallelStream( )
+			.map( trace -> {
+				XTrace traceCopy = factory.createTrace( ( XAttributeMap ) trace.getAttributes().clone() );
+				traceCopy.addAll(
+						trace.stream( )
+							.map( event -> factory.createEvent( ( XAttributeMap ) event.getAttributes().clone() ))
+							.collect( Collectors.toList() )
+				);
+				return traceCopy;
+			})
+			.filter( trace -> trace.size() > 0 );
 
-		for ( XTrace trace : log ) {
-			traceCopy	= factory.createTrace ();
-			traceCopy.setAttributes( trace.getAttributes() );
-
-			for ( XEvent event : trace ) {
-				XEvent eventCopy = factory.createEvent( );
-				eventCopy.setAttributes( event.getAttributes() );
-				traceCopy.add( eventCopy );
-			}
-
-			if ( traceCopy.size() > 0 )
-				logCopy.add( traceCopy );
-		}
+		XLog logCopy	= factory.createLog( ( XAttributeMap ) log.getAttributes().clone() );
+		logCopy.addAll( data.collect( Collectors.toList() ) );
 		return logCopy;
 	}
 

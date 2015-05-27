@@ -2,7 +2,6 @@ package org.processmining.plugins.PBMiner;
 
 import org.deckfour.xes.classification.XEventClassifier;
 import org.deckfour.xes.model.XLog;
-import org.deckfour.xes.model.XTrace;
 import org.processmining.contexts.cli.CLIContext;
 import org.processmining.contexts.cli.CLIPluginContext;
 import org.processmining.framework.plugin.PluginContext;
@@ -13,6 +12,7 @@ import org.processmining.plugins.PBMiner.classifiers.HeuristicEventsClassifier;
 
 import java.io.PrintStream;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class BranchProcessor {
 	public XLog log;
@@ -85,28 +85,40 @@ public class BranchProcessor {
 				eventToBranch.put( event, new HashSet<>( Arrays.asList( i ) ) );
 
 		XLog blockLog = XLogReader.filterByEvents( this.log, FindBlockEvents( eventToBranch.keySet(), this.contextAnalysis.predecessors ) );
+		Set<String> blockStartEvents = branchStartEvents.stream().flatMap( Collection:: stream ).collect( Collectors.toSet() );
 
 //		Mark events with a single branch opened
-		for ( XTrace trace : blockLog ) {
-			Set< Integer > openedBranches = new HashSet<>( );
-			String event;
+		blockLog.stream()
+			.forEach( trace -> {
+				Set< Integer > openedBranches = new HashSet<>( );
+				trace.stream( ).forEach( event -> {
+					String eventName = this.contextAnalysis.fetchName( event );
 
-			for ( int i = 0, size = trace.size( ) ; i < size ; i++ ) {
-				event = this.contextAnalysis.fetchName( trace.get( i ) );
+					if ( ! eventToBranch.containsKey( eventName ) ) {
+						eventToBranch.put( eventName, new HashSet<>( openedBranches ) );
+						return;
+					}
+					if ( blockStartEvents.contains( eventName ) ) {
+						openedBranches.addAll( eventToBranch.get( eventName ) );
+						return;
+					}
 
-				if ( ! eventToBranch.containsKey( event ) ) {
-					eventToBranch.put( event, new HashSet<>( openedBranches ) );
-					continue;
-				}
+					eventToBranch.get( eventName ).retainAll( openedBranches );
+				});
+			});
 
-				if ( eventToBranch.get( event ).size( ) == 1 ) {
-					openedBranches.addAll( eventToBranch.get( event ) );
-					continue;
-				}
+//		Put events, with empty branch candidates, into a separate branch
+		Set< String > eventsEmptyBranchCandidates = eventToBranch.entrySet( ).stream( )
+				.filter( entry -> entry.getValue( ).isEmpty( ) )
+				.map( Map.Entry:: getKey )
+				.collect( Collectors.toSet( ) );
 
-				eventToBranch.get( event ).retainAll( openedBranches );
-			}
+		if ( ! eventsEmptyBranchCandidates.isEmpty() ) {
+			int newBranchIndex = branchStartEvents.size();
+			branchStartEvents.add( eventsEmptyBranchCandidates );
+			eventsEmptyBranchCandidates.stream( ).forEach( x -> eventToBranch.get( x ).add( newBranchIndex ) );
 		}
+
 		printStream.println( "Events to branches:" );
 		printStream.println( eventToBranch );
 

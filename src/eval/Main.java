@@ -39,14 +39,21 @@ public class Main {
 //		ReduceTree.reduceTree( psTrees );
 //		ProcessTreeFactory.SaveProcessTreeToFile( "C:/Users/Alle/Study/4/m/docs/data/Eval/s6/pstree2.ptml", psTrees );
 //		System.out.println( psTrees );
-		runPerfTest( "../docs/data/Eval/", 100, "s1", "s2", "s3", "s4", "s5", "s6" );
+//		runPerfTest( "../docs/data/Eval/", 100, "s1", "s2", "s3", "s4", "s5", "s6" );
+//
+//		runTest( "../docs/data/Eval/s1/", 20, 1000, 2, 50, 1, new int[]{ 6, 15 } );
+//		runTest( "../docs/data/Eval/s2/", 2240, 100, 10, 210, 5, new int[]{ 6, 15 } );
+//		runTest( "../docs/data/Eval/s3/", 10656, 100, 10, 320, 5, null );
+//		runTest( "../docs/data/Eval/s4/", 280, 100, 10, 320, 5, null );
+//		runTest( "../docs/data/Eval/s5/", 221760, 100, 10, 320, 5, null );
+//		runTest( "../docs/data/Eval/s6/", 102960, 100, 10, 210, 5, null );
 
-		runTest( "../docs/data/Eval/s1/", 20, 1000, 2, 50, 1, new int[]{ 6, 15 } );
-		runTest( "../docs/data/Eval/s2/", 2240, 100, 10, 1000, 10, new int[]{ 6, 15 } );
-		runTest( "../docs/data/Eval/s3/", 10656, 100, 10, 1000, 10, null );
-		runTest( "../docs/data/Eval/s4/", 280, 100, 10, 1000, 10, null );
-		runTest( "../docs/data/Eval/s5/", 221760, 100, 10, 1000, 10, null );
-		runTest( "../docs/data/Eval/s6/", 102960, 100, 10, 1000, 10, null );
+//		runTest( "../docs/data/Eval/s1/", 20, 100, 2, 50, 1, new int[]{ 6, 15 } );
+//		runTest( "../docs/data/Eval/s2/", 2240, 100, 10, 50, 1, new int[]{ 6, 15 } );
+//		runTest( "../docs/data/Eval/s3/", 10656, 100, 10, 50, 1, null );
+//		runTest( "../docs/data/Eval/s4/", 280, 100, 10, 50, 1, null );
+//		runTest( "../docs/data/Eval/s5/", 221760, 100, 10, 50, 1, null );
+//		runTest( "../docs/data/Eval/s6/", 102960, 100, 10, 50, 1, null );
 	}
 
 	public static void runPerfTest( String dataDirPath, int samples ) throws Exception {
